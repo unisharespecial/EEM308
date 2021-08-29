@@ -1,0 +1,49 @@
+display('Mustafa TANRIVER  / 20694641')
+display ('----- 169 .a -----')
+
+x=[1]
+y=[1 2]
+ps=roots(x)
+sz=roots(y)
+h= tf(x,y)
+display('Nedensel bir sistemin transfer fonksiyonunu , yazýlan kodlar ile belirtilmiþtir. Nedensel olmayan sistemlerde -y(-t) =y(t) olduðundan denklemi,  -dy(-t)/dt - 2y(-t)= -x(-t) haline gelir. ')
+
+ 
+r=[-1]
+w=[-1 -2]
+ps2=roots(r)
+sz2=roots(w)
+h2=tf(r,w)
+
+
+display('Buradan gördüðümüz gibi; biri causal, diðeri anticausal iki sistemin de transfer fonksiyonu ayný çýkmýþtýr. Frekans domain inde bu beklendik bir durumdur. Causal ve anticasual sistemleri ayýracak olan yakýnsama bölgesi (ROC) dir. Matlab da bu sonucu göremesek de aslýnda causal sistem için ROC>-2 (right-sided), anticausal sistem için ise ROC<-2 dir (left-sided).')
+display('-----------------------------')
+display('----- 177 (b) -----')
+display('-----------------------------')
+display('Bu soruda bizden istenen, kutup açýsýnýn ve kutup vektörünün frekansa baðlý deðiþimini incelemektir. Bunun için; birim çember üzerinde, toplam 2*PI açýsal frekans elde edecek þekilde, 512 nokta seçilmiþtir. Polevectors adý ile tanýmlanan matris, 2*512 boyutunda olup (ps1-unitcircle) deðerlerini tutmaktadýr. Polelength1 de ise frekans cevabýnýn boyu olan |H1(e^jw)| deðeri tutulmaktadýr. Buna göre; sistemimizin frekans cevabý çizdirilen grafiklerde belirtildiði gibi olacaktýr: ')
+
+
+b=[1 0 0];
+a=[1 -0.9 0.81];
+ps1=roots(a);
+zs1=roots(b);
+%zplane(zr1,ps1)
+omega=[0:511]*pi/256;
+unitcirc=exp(j*omega);
+polevectors1=ones(2,1)*unitcirc-ps1*ones(1,512);
+polelength1=abs(polevectors1);
+poleangle=atan2(omega,unitcirc);
+
+
+figure(1);
+plot(omega,polelength1,'r')
+xlabel('omega');
+ylabel('|H1(e^jw)|');
+hold off
+
+
+figure(2);
+plot (omega,poleangle,'b')
+xlabel('omega');
+ylabel('(H1(e^jw)-AÇI');
+hold off
